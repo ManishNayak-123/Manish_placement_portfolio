@@ -1,8 +1,7 @@
 
 
-
-// import React from "react";
-// import { Link, useNavigate } from "react-router"; // Imported useNavigate
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router"; // MUST be 'react-router-dom'
 // import {
 //   ArrowRight,
 //   Code2,
@@ -18,26 +17,32 @@
 //   Layers,
 //   ShieldCheck,
 //   Zap,
-//   GitBranch
+//   GitBranch,
+//   X // Added X icon to close modal
 // } from "lucide-react";
 // import Header from "./Header";
 // import Footer from "./Footer";
+// import SignUp from "./SignUP";
+// // import SignUp from "./SignUp"; // Import your SignUp component/modal
 
 // function Home() {
 //   const navigate = useNavigate();
 
-//   // Handle protected navigation for "For More Projects"
+//   // State to manage SignUp modal visibility
+//   const [showSignUpModal, setShowSignUpModal] = useState(false);
+
+//   // Handle protected navigation for "Explore Projects" & "For More Projects"
 //   const handleMoreProjectsClick = (e) => {
 //     e.preventDefault();
 
-//     // Check if user is logged in (Adjust key name according to your setup, e.g., 'token', 'user', etc.)
+//     // Check authentication token or user object in localStorage
 //     const isAuthenticated = localStorage.getItem("token") || localStorage.getItem("user");
 
 //     if (isAuthenticated) {
 //       navigate("/projects");
 //     } else {
-//       // Redirect to signup if not authenticated
-//       navigate("/signup");
+//       // Open SignUp Modal overlay directly on Home page
+//       setShowSignUpModal(true);
 //     }
 //   };
 
@@ -95,20 +100,18 @@
 //   ];
 
 //   return (
-//     <div>
+//     <div className="relative">
 //       <Header />
 //       <main className="bg-slate-950 text-slate-100 font-sans min-h-screen overflow-x-hidden">
         
 //         {/* HERO SECTION */}
 //         <section className="relative py-20 lg:py-32 border-b border-slate-800/80 overflow-hidden">
-//           {/* Ambient Glows */}
 //           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
 //           <div className="absolute bottom-10 right-10 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
 //           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 //             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
-//               {/* Left Column: Intro */}
 //               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
 //                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs sm:text-sm font-medium">
 //                   <Sparkles size={15} />
@@ -144,7 +147,6 @@
 //                   </a>
 //                 </div>
 
-//                 {/* Highlights */}
 //                 <div className="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 max-w-md mx-auto lg:mx-0">
 //                   <div>
 //                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white">10+</h2>
@@ -161,7 +163,7 @@
 //                 </div>
 //               </div>
 
-//               {/* Right Column: Code Terminal Card */}
+//               {/* Terminal Card */}
 //               <div className="lg:col-span-5">
 //                 <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-xs sm:text-sm">
 //                   <div className="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
@@ -283,7 +285,6 @@
 //                   </div>
 
 //                   <div className="p-6 pt-0 space-y-6">
-//                     {/* Tech Tags */}
 //                     <div className="flex flex-wrap gap-2">
 //                       {project.tags.map((tag, tIdx) => (
 //                         <span
@@ -295,7 +296,6 @@
 //                       ))}
 //                     </div>
 
-//                     {/* Links */}
 //                     <div className="flex items-center gap-4 pt-4 border-t border-slate-800/80">
 //                       <a
 //                         href={project.github}
@@ -326,19 +326,13 @@
 //             {/* PROTECTED "FOR MORE PROJECTS" BUTTON */}
 //             <div className="flex justify-center pt-8">
 //               <button
+//                 type="button"
 //                 onClick={handleMoreProjectsClick}
 //                 className="group relative inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-200 text-sm font-semibold tracking-wide shadow-lg shadow-indigo-950/30 overflow-hidden transition-all duration-300 hover:border-indigo-500/50 hover:text-white hover:shadow-indigo-500/20 active:scale-95 cursor-pointer"
 //               >
-//                 {/* Hover Glow Effect */}
 //                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 via-violet-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-//                 {/* Left Icon */}
 //                 <FolderGit2 size={18} className="text-indigo-400 group-hover:rotate-12 transition-transform duration-300" />
-
-//                 {/* Button Label */}
 //                 <span>For More Projects</span>
-
-//                 {/* Sliding Arrow Icon */}
 //                 <ArrowRight
 //                   size={18}
 //                   className="text-slate-400 group-hover:text-indigo-400 group-hover:translate-x-1.5 transition-all duration-300"
@@ -349,7 +343,7 @@
 //           </div>
 //         </section>
 
-//         {/* TECH STACK & SKILLS */}
+//         {/* TECH STACK SECTION */}
 //         <section className="py-20 border-b border-slate-800/80 bg-slate-950/50">
 //           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 //             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -399,15 +393,29 @@
 
 //       </main>
 //       <Footer />
+
+//       {/* SIGNUP MODAL OVERLAY */}
+//       {showSignUpModal && (
+//         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+//           <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+//             <button
+//               onClick={() => setShowSignUpModal(false)}
+//               className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+//             >
+//               <X size={20} />
+//             </button>
+//             <SignUp onClose={() => setShowSignUpModal(false)} />
+//           </div>
+//         </div>
+//       )}
 //     </div>
 //   );
 // }
 
 // export default Home;
 
-
 import React, { useState } from "react";
-import { useNavigate } from "react-router"; // MUST be 'react-router-dom'
+import { useNavigate } from "react-router-dom"; // Fixed react-router import
 import {
   ArrowRight,
   Code2,
@@ -424,18 +432,18 @@ import {
   ShieldCheck,
   Zap,
   GitBranch,
-  X // Added X icon to close modal
+  X
 } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
 import SignUp from "./SignUP";
-// import SignUp from "./SignUp"; // Import your SignUp component/modal
+import Login from "./Login"; // Import your Login component/modal
 
 function Home() {
   const navigate = useNavigate();
 
-  // State to manage SignUp modal visibility
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  // Unified modal state: "signup" | "login" | null
+  const [authModalMode, setAuthModalMode] = useState(null);
 
   // Handle protected navigation for "Explore Projects" & "For More Projects"
   const handleMoreProjectsClick = (e) => {
@@ -448,9 +456,11 @@ function Home() {
       navigate("/projects");
     } else {
       // Open SignUp Modal overlay directly on Home page
-      setShowSignUpModal(true);
+      setAuthModalMode("signup");
     }
   };
+
+  const closeModal = () => setAuthModalMode(null);
 
   const techStack = [
     { name: "React.js", category: "Frontend", level: "Advanced" },
@@ -800,17 +810,28 @@ function Home() {
       </main>
       <Footer />
 
-      {/* SIGNUP MODAL OVERLAY */}
-      {showSignUpModal && (
+      {/* SHARED AUTH MODAL OVERLAY (FOR BOTH SIGNUP AND LOGIN) */}
+      {authModalMode && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
             <button
-              onClick={() => setShowSignUpModal(false)}
+              onClick={closeModal}
               className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
             >
               <X size={20} />
             </button>
-            <SignUp onClose={() => setShowSignUpModal(false)} />
+
+            {authModalMode === "signup" ? (
+              <SignUp
+                onClose={closeModal}
+                onSwitchToLogin={() => setAuthModalMode("login")}
+              />
+            ) : (
+              <Login
+                onClose={closeModal}
+                onSwitchToSignUp={() => setAuthModalMode("signup")}
+              />
+            )}
           </div>
         </div>
       )}
