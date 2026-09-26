@@ -19,7 +19,7 @@ app.use(cookieParser()); //cookie parser is an express.js middleware used to rea
 // and make them available in req.cookie.
 
 const corseOptions = {
-    origin:"http://localhost:5173",
+    origin:"https://manish-placement-portfolio-2.onrender.com",
     Credentials:true
 }
 app.use(cors(corseOptions)); //It is used to share the resource between two origins.

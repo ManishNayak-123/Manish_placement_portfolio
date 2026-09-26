@@ -35,7 +35,7 @@ function Contact() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/message/contact",
+        "https://manish-placement-portfolio-2.onrender.com/api/v1/message/contact",
         formData,
         {
           headers: {

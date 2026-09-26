@@ -314,7 +314,7 @@ function SignUp({ onClose, onSwitchToLogin }) {
       }
 
       const response = await axios.post(
-        "http://localhost:8080/api/v1/user/register",
+        "https://manish-placement-portfolio-2.onrender.com/api/v1/user/register",
         data,
         {
           headers: {
