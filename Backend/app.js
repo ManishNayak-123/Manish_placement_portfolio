@@ -7,8 +7,10 @@ import router from "./router/userRouter.js";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import router1 from "./router/contactRoutes.js";
+import path from "path";
 const app = express();
 
+const _dirname = path.resolve();
 // dotenv.config();//It is used to load environment variable from the .env file to process.env file.
 app.use(express.urlencoded({extended:true}));//express.urlencoded is the built in middleware used to read
 // data send from the html form in url encoded format.
@@ -26,6 +28,10 @@ app.use(cors(corseOptions)); //It is used to share the resource between two orig
 app.use("/api/v1/user",router);
 app.use("/api/v1/message",router1);
 
+app.use(express.static(path.join(_dirname,"/my-project/dist")));
+app.get(/.*/,(_,res)=>{
+    res.sendFile(path.resolve(_dirname,"my-project","dist","index.html"));
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT,()=>{
     connectDB();
@@ -33,50 +39,3 @@ app.listen(PORT,()=>{
     
 });
 
-
-// import express from "express";
-// import cookieParser from "cookie-parser";
-// import dotenv from "dotenv";
-// import cors from "cors";
-// import connectDB from "./config/db.js";
-// import authRoutes from "./routes/authRoutes.js";
-// import companyRoutes from "./routes/companyRoutes.js";
-// import jobRoutes from "./routes/jobRoutes.js";
-// import applicationRoutes from "./routes/applicationRoutes.js";
-// import path from "path";
-
-// dotenv.config({});
-
-// const app = express();
-// const __dirname = path.resolve(); //for devops
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(cookieParser());
-
-// const corsOptions = {
-//   origin: "https://final-year-srgc-project-1.onrender.com",
-//   credentials: true,
-// };
-
-// app.use(cors(corsOptions));
-
-// app.use("/api/v1/user", authRoutes);
-// app.use("/api/v1/company", companyRoutes);
-// app.use("/api/v1/job", jobRoutes);
-// app.use("/api/v1/application", applicationRoutes);
-
-// // frontend static files
-// app.use(express.static(path.join(__dirname, "my-project", "dist")));
-
-// // React routing fix
-// app.get(/.*/, (_, res) => {
-//   res.sendFile(path.resolve(__dirname, "my-project", "dist", "index.html"));
-// });
-
-// const PORT = process.env.PORT || 3000;
-
-// app.listen(PORT, () => {
-//   connectDB();
-//   console.log(`Server running on port ${PORT}`);
-// });
