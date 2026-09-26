@@ -415,7 +415,7 @@
 // export default Home;
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Fixed react-router import
+import { useNavigate } from "react-router"; // Fixed react-router import
 import {
   ArrowRight,
   Code2,
